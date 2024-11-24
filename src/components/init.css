@@ -1,0 +1,15 @@
+.navBar{
+    display: flex;
+    flex-direction: row;
+    padding:  10px;
+    background-color: black;
+    font-size: 15px;
+    color: white;
+    gap:20px
+}
+
+.navElement{
+    color:white;
+    text-decoration: none;
+    font-weight: 400;
+}
