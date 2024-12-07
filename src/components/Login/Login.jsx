@@ -1,18 +1,76 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import authService from '../Services/AuthService';
+import { basename } from '../Util/Constants';
 
 const Login = () => {
-    const navigate = useNavigate();
 
-    const fakeLogin = ()=>{
-        localStorage.setItem('authToken', 'daVolimCrnoBele');
-        navigate("/");
+  const [credentials, setCredentials] =
+    useState({
+      username: ''
+      , password: ''
+    });
+
+  const handleChange = (ev) => {
+    setCredentials({ ...credentials, [ev.target.name]: ev.target.value });
+  }
+
+  const handleEnter = (ev) => {
+    if (ev.key === "Enter" && credentials.password !== '' && credentials.username !== '') {
+      login();
     }
-  return (
-    <div>
-        <p>Login</p>
-        <button onClick={fakeLogin}>Fake it!</button>
+  }
 
+
+  const login = (ev) => {
+    console.log(credentials)
+    
+        authService.login(credentials).then((res) => {
+            const token = res.data.token;
+            
+            localStorage.setItem("authToken", "Bearer " + token);
+            window.location.href = `${basename}/`;
+            document.body.style.backgroundColor = "white";
+    
+        });
+  }
+
+  document.body.style.backgroundColor = "black";
+
+  return (
+    <div className='loginForm'>
+      <div className='loginFormControl'>
+        <div className='label'>
+          <div>username</div>
+        </div>
+        <div><input
+          type="text"
+          name="username"
+          placeholder='username'
+          value={credentials.username}
+          onChange={handleChange}
+          onKeyDown={handleEnter}
+        />
+        </div>
+      </div>
+      <div className='loginFormControl'>
+        <div className='label'>
+          <div>password</div>
+        </div>
+        <div><input
+          type="password"
+          name="password"
+          placeholder='password'
+          value={credentials.password}
+          onChange={handleChange}
+          onKeyDown={handleEnter}
+        />
+        </div>
+      </div>
+      <div className='loginFormControl'>
+        <div className='button'>
+          <button onClick={login}>Login</button>
+        </div>
+      </div>
     </div>
   )
 }
