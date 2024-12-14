@@ -3,10 +3,13 @@ import request from '../Util/AxiosWrapper';
 import { useParams } from 'react-router-dom';
 import EditCampaignHeader from './EditCampaignHeader';
 import CampaignForm from './CampaignForm';
-import { CampaignDictionary } from '../CustomControl/TableDictionary';
+import { boolDomain, CampaignDictionary } from '../CustomControl/TableDictionary';
 import ControlTitle from '../CustomControl/ControlTitle';
 import ResolutionPickerHeader from '../Resolution/ResolutionPickerHeader';
 import CampaignDefinition from './CampaignDefinition';
+import useStateWithFlag from '../Util/useStateWithFlag';
+import CampaignBinRangeGroups from './CampaignBinRangeGroups';
+import CampaignTerminalGroups from './CampaignTerminalGroups';
 
 const EditCampaign = () => {
     let { id } = useParams();
@@ -19,6 +22,7 @@ const EditCampaign = () => {
     const [binRangesGroup, setBinRangesGroup] = useState([]);
     const [terminalGroups, setTerminalGroups] = useState([]);
     const [selectedBinRange, setSelectedBinRange] = useState()
+    const [dirty, setDirty] = useState(false);
     const [campaign, setCampaign] = useState(
         {
             "campaignId": "",
@@ -26,39 +30,25 @@ const EditCampaign = () => {
             "campaignDescription": "",
             "campaignStart": "",
             "campaignEnd": "",
-            "campaignStatus": false,
+            "campaignStatus": 1,
             "campaignText": "",
-            "contactCollecting": false,
+            "contactCollecting": 1,
             "collectingText": "",
             "definitions": [],
+            "binRangesGroups":[],
+            "terminalGroups":[],
         }
     );
-    const [usedBinRangeGroups, setUsedBinRangesGroup] = useState([]);
-    const [usedTerminalGroups, setUsedTerminalGroups] = useState([]);
-    const [dirty, setDirty] = useState(false);
-
-    const boolDomain = [
-        {
-            "id": 0,
-            "value": "Y"
-        }
-        ,
-        {
-            "id": 1,
-            "value": "N"
-        }];
 
 
     useEffect(() => {
         if (id !== undefined) {
             request.request('GET', '/api/v1/campaign/' + id).then((res) => {
                 setCampaign(res.data);
-                setUsedBinRangesGroup(res.data.binRangesGroups);
-                setUsedTerminalGroups(res.data.terminalGroups);
             });
             setNewCampaign(false);
         }
-    }, [id]);
+    }, [id, setCampaign]);
 
     useEffect(() => {
         const getResponses = (id) => {
@@ -87,7 +77,10 @@ const EditCampaign = () => {
     }, []);
 
     const saveCampaign = () => {
-
+        request.request('POST', '/api/v1/campaign/', campaign).then((res) => {
+            console.log(res.data);
+            setDirty(false);
+        });
     }
 
     const getResolutionTitle = (id) => {
@@ -153,7 +146,12 @@ const EditCampaign = () => {
         setDirty(true);
 
     }
-
+    /*
+        const handleChange = (ev)=>{
+            setCampaign({ ...campaign, [ev.target.id]: ev.target.value });
+            setDirty(true);
+        }
+    */
     return (
         <div className='displayObject'>
             <div>
@@ -216,6 +214,7 @@ const EditCampaign = () => {
                                     object={campaign}
                                     setObject={setCampaign}
                                     domains={[statuses, boolDomain]}
+                                    setDirty={setDirty}
                                 />
                             </div>
                         }
@@ -239,8 +238,31 @@ const EditCampaign = () => {
                             )
 
                         }
-                        {activeTab === "14" && <div className="tab-panel">Content for Tab 2</div>}
-                        {activeTab === "15" && <div className="tab-panel">Content for Tab 3</div>}
+                        {activeTab === "14" &&
+
+                            (
+                                <div className="tab-panel">
+                                    <CampaignBinRangeGroups
+                                        object={campaign}
+                                        setObject={setCampaign}
+                                        title="Edit Campaign Bin Range Groups"
+                                        setDirty={setDirty} />
+                                </div>
+                            )
+                        }
+                        {
+                            activeTab === "15" &&
+                            (
+                                <div className="tab-panel">
+                                    <CampaignTerminalGroups
+                                        object={campaign}
+                                        setObject={setCampaign}
+                                        title="Edit Campaign Terminal Groups"
+                                        setDirty={setDirty}
+                                    />
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>

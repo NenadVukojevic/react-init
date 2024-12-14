@@ -23,13 +23,13 @@ const ListRow = ({ headers, row, onEdit }) => {
                                 header.type === 'button' && header.action === 'onEdit' &&
                                 (
                                     <button onClick={() => onEdit(resolveNestedAttribute(row, header.id))}>
-                                        edit
+                                        {header.title}
                                     </button>
                                 )
                             }
                             {
                                 header.type === 'boolean' && (
-                                    resolveNestedAttribute(row, header.id) === false ? "N" : "Y"
+                                    resolveNestedAttribute(row, header.id) === 1 ? "Yes" : "No"
                                 )
                             }
                             {

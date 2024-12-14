@@ -374,7 +374,7 @@ const CampaignDefinition = ({ responses, definition, setDefinition, onSave, coll
 
 
 
-                                                    <div className="camp_message" style={styleText}>
+                                                    <div style={styleText}>
 
                                                         {campaignText && (campaignText)}
 
@@ -527,7 +527,7 @@ const CampaignDefinition = ({ responses, definition, setDefinition, onSave, coll
                                                         )
                                                     }
 
-                                                    <div className="camp_message" style={styleConfirmationText}>
+                                                    <div style={styleConfirmationText}>
 
                                                         {definition && (definition.confirmationText)}
 
@@ -535,9 +535,9 @@ const CampaignDefinition = ({ responses, definition, setDefinition, onSave, coll
 
                                                     {
                                                         collecting && (
-                                                            <div className='camp_message' style={styleCollectingInput}>
-                                                                <input type="text"></input>
-                                                            </div>
+
+                                                            <input style={styleCollectingInput} type="text"></input>
+
                                                         )
                                                     }
                                                 </div>

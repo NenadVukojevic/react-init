@@ -101,103 +101,100 @@ const ListOfBackgrounds = () => {
     }
 
     return (
-        <div className='background_container'>
-            <div className='controlTitle'>
-                Campaign Backgrounds
-            </div>
-            <div className="mb-3 row">
-                <label className="col-sm-2 col-form-label">Resolution:</label>
-                <div className="col-sm-2">
-                    <ResolutionPicker
-                        resolutions={resolutions}
-                        setResolutionId={setResolutionId}
-                        resolutionId={resolutionId}
-                    />
-
+        <div className='displayObject'>
+            <div className='background_container'>
+                <div className='controlTitle'>
+                    Campaign Backgrounds
                 </div>
-            </div>
-            {
-                message && (
-                    <div className='message'>
-                        {message}
+                <div className='formControl'>
+                    <label className="formLabel">Resolution:</label>
+                    <div className="formInput">
+                        <ResolutionPicker
+                            resolutions={resolutions}
+                            setResolutionId={setResolutionId}
+                            resolutionId={resolutionId}
+                        />
+
                     </div>
-                )
-            }
-            <div >
+                </div>
+                {
+                    message && (
+                        <div className='message'>
+                            {message}
+                        </div>
+                    )
+                }
+                <div className='formActionBar'>
+                    {
+                        state === FormState.LIST &&
+                        (
+
+                            <button
+                                onClick={() => setState(FormState.NEW)}
+                            >Add</button>
+                        )
+                    }
+                    {
+                        state === FormState.LIST && choosenImage &&
+                        (
+                            <button
+                                onClick={deleteImage}
+                            >Delete</button>
+                        )
+                    }
+                </div>
+                <div className='formActionBar'>
+                    {
+                        state === FormState.NEW &&
+                        (
+
+                            <button
+                                type="button"
+                                className="btn btn-secondary mr-2 mt-2"
+                                onClick={onCancel}
+                            >Cancel</button>
+
+                        )
+                    }
+                    {
+                        file &&
+                        (
+
+                            <button
+                                type="button"
+                                className="btn btn-secondary mr-2 mt-2"
+                                onClick={saveImage}
+                            >Save</button>
+
+                        )
+                    }
+                </div>
                 {
                     state === FormState.LIST &&
                     (
-
-                        <button
-                            type="button"
-                            className="btn btn-secondary mr-2 mt-2"
-                            onClick={() => setState(FormState.NEW)}
-                        >Add</button>
+                        <div>
+                            <BackgroundPicker
+                                backgrounds={backgrounds}
+                                onClick={onPickerChoice}
+                                choosenImage={choosenImage}
+                            />
+                        </div>
                     )
                 }
                 {
-                    state === FormState.LIST && choosenImage &&
-                    (
-                        <button
-                            type="button"
-                            className="btn btn-secondary mr-2 mt-2"
-                            onClick={deleteImage}
-                        >Delete</button>
+                    state === FormState.NEW && (
+                        <div>
+                            <BackgroundForm
+                                resolution={resolution}
+                                saveImage={saveImage}
+                                file={file}
+                                setFile={setFile}
+                                setMessage={setMessage}
+                            />
+                        </div>
                     )
                 }
             </div>
-            <div>
-                {
-                    state === FormState.NEW &&
-                    (
-
-                        <button
-                            type="button"
-                            className="btn btn-secondary mr-2 mt-2"
-                            onClick={onCancel}
-                        >Cancel</button>
-
-                    )
-                }
-                {
-                    file &&
-                    (
-
-                        <button
-                            type="button"
-                            className="btn btn-secondary mr-2 mt-2"
-                            onClick={saveImage}
-                        >Save</button>
-
-                    )
-                }
-            </div>
-            {
-                state === FormState.LIST &&
-                (
-                    <div>
-                        <BackgroundPicker
-                            backgrounds={backgrounds}
-                            onClick={onPickerChoice}
-                            choosenImage={choosenImage}
-                        />
-                    </div>
-                )
-            }
-            {
-                state === FormState.NEW && (
-                    <div>
-                        <BackgroundForm
-                            resolution={resolution}
-                            saveImage={saveImage}
-                            file={file}
-                            setFile={setFile}
-                            setMessage={setMessage}
-                        />
-                    </div>
-                )
-            }
-
         </div>
     )
 }

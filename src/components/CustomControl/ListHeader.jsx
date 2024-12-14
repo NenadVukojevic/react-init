@@ -1,5 +1,7 @@
 import React from 'react'
 import { SortOrder } from '../Util/FormStates'
+import UP from '../../images/up.png'
+import DOWN from '../../images/down.png'
 
 const ListHeader = ({ headers, setSortOrder, sortId, sortOrder }) => {
     return (
@@ -15,12 +17,12 @@ const ListHeader = ({ headers, setSortOrder, sortId, sortOrder }) => {
                             {header.title}
                             {
                                 header.id === sortId && sortOrder === SortOrder.ASC && (
-                                    <>▲</>
+                                    <img className='icon' src={UP} alt="▲" ></img>
                                 )
                             }
                             {
                                 header.id === sortId && sortOrder === SortOrder.DESC && (
-                                    <>▼</>
+                                    <img className='icon' src={DOWN} alt="▼" ></img>
                                 )
                             }
                         </div>

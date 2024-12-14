@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import authService from '../Services/AuthService';
 import { basename } from '../Util/Constants';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
 
   const [credentials, setCredentials] =
     useState({
@@ -10,9 +12,17 @@ const Login = () => {
       , password: ''
     });
 
+  useEffect(() => {
+    localStorage.clear();
+  }, [])
+
+
+
   const handleChange = (ev) => {
     setCredentials({ ...credentials, [ev.target.name]: ev.target.value });
   }
+
+
 
   const handleEnter = (ev) => {
     if (ev.key === "Enter" && credentials.password !== '' && credentials.username !== '') {
@@ -22,16 +32,16 @@ const Login = () => {
 
 
   const login = (ev) => {
-    console.log(credentials)
-    
-        authService.login(credentials).then((res) => {
-            const token = res.data.token;
-            
-            localStorage.setItem("authToken", "Bearer " + token);
-            window.location.href = `${basename}/`;
-            document.body.style.backgroundColor = "white";
-    
-        });
+  
+    authService.login(credentials).then((res) => {
+      const token = res.data.token;
+
+      localStorage.setItem("authToken", "Bearer " + token);
+      document.body.style.backgroundColor = "white";
+      navigate(`${basename}/version`)
+      //window.location.href = `${basename}/`;
+
+    });
   }
 
   document.body.style.backgroundColor = "black";

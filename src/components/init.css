@@ -147,6 +147,13 @@ button{
     padding: 3px;
 }
 
+.formActionBar{
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  padding: 3px;
+
+}
 
 .pagination{
     display: flex;
@@ -155,6 +162,7 @@ button{
     padding: 4px;
     text-align: center;
     margin-top: 5px;
+    align-items: flex-end;
 }
 
 .hidden{
@@ -166,8 +174,10 @@ button{
     border: 1px solid silver;
     border-radius:  2px;
     width: 30px;
+/*    
     font-size: 14px;
     font-weight: bold;
+    */
 }
 
 
@@ -257,5 +267,16 @@ button{
     }
   }
 
+.dualList{
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+}
 
-
+.icon{
+  width: 15px;
+  height: 15px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

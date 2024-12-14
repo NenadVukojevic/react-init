@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { resolveNestedAttribute } from '../Util/util'
 
-const ObjectForm = ({ dictionary, object, setObject, onSave, onCancel, domains }) => {
-
+const ObjectForm = ({ dictionary, object, setObject, onSave, onCancel, domains, setDirty }) => {
+    // in case that save button is active on this control
+    // this is local dirty variable
+    // in other case we are using setDirty from the up tree controls
+    const [dirty, setdirty] = useState(false);
     const handleChange = (ev) => {
-        setObject({ ...object, [ev.target.id]: ev.target.value });
-
+        //setObject(ev);
+        setObject({ ...object, [ev.target.id]: ev.target.value })
+        setDirty && setDirty(true);
+        setdirty(true);
     }
+
+    console.log("ObjectFOrm", domains, object);
+
     return (
         <div className='formDisplay'>
             {
@@ -21,11 +29,11 @@ const ObjectForm = ({ dictionary, object, setObject, onSave, onCancel, domains }
                                 element.formType === 'input' && (
                                     <div className='formInput'>
                                         <input
-                                            style={{"width":element.width}}
+                                            style={{ "width": element.width }}
                                             id={element.id}
                                             value={resolveNestedAttribute(object, element.id)}
                                             onChange={handleChange}
-                                            type={element.controlType?element.controlType:"text"}
+                                            type={element.controlType ? element.controlType : "text"}
                                         ></input>
                                     </div>
 
@@ -35,7 +43,7 @@ const ObjectForm = ({ dictionary, object, setObject, onSave, onCancel, domains }
                                 element.formType === 'textarea' && (
                                     <div className='formInput'>
                                         <textarea
-                                            style={{"width":element.width}}
+                                            style={{ "width": element.width }}
                                             id={element.id}
                                             value={resolveNestedAttribute(object, element.id)}
                                             onChange={handleChange}
@@ -77,8 +85,8 @@ const ObjectForm = ({ dictionary, object, setObject, onSave, onCancel, domains }
             {
                 typeof (onSave) === 'function' && (
 
-                    <div className='formInput'>
-                        <button onClick={onSave}>Save</button>
+                    <div className='formActionBar'>
+                        <button disabled={!dirty} onClick={onSave}>Save</button>
 
                         <button onClick={onCancel}>Cancel</button>
                     </div>

@@ -4,7 +4,7 @@ import { FormState, SortOrder } from '../Util/FormStates';
 import { Paginator } from '../CustomControl/Paginator';
 import { sortArray } from '../Util/util';
 import ListOfResponses from './ListOfResponses';
-import { ResponseDictionary } from '../CustomControl/TableDictionary';
+import { boolDomain, ResponseDictionary } from '../CustomControl/TableDictionary';
 import ResponseForm from './ResponseForm';
 
 const Responses = () => {
@@ -70,7 +70,7 @@ const Responses = () => {
       "confirmation": found.confirmation
       
     }*/);
-    setState(FormState.NEW);
+    setState(FormState.EDIT);
   }
 
   const onNew = () => {
@@ -84,12 +84,14 @@ const Responses = () => {
   }
 
   const onSave = () => {
+    console.log("onSave", current);
+    
     request.request('POST', '/api/v1/campaign/response', current).then((res) => {
       setCurrent(res.data);
       console.log(res.data);
+      setState(FormState.LIST);
     });
-    setState(FormState.LIST);
-
+/**/
   }
 
   const onCancel = () => {
@@ -124,6 +126,8 @@ const Responses = () => {
             setObject={setCurrent}
             onSave={onSave}
             onCancel={onCancel}
+            domains={[boolDomain]}
+            title="Edit Response"
           />
 
         )
@@ -138,6 +142,8 @@ const Responses = () => {
             setObject={setCurrent}
             onSave={onSave}
             onCancel={onCancel}
+            domains={[boolDomain]}
+            title="Add Response"
           />
 
         )

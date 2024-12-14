@@ -34,7 +34,6 @@ class AxiosWrapper {
     }
 
     onSuccess(response) {
-        console.log('bio sam prozvan')
         return response;
     }
 
@@ -54,7 +53,6 @@ class AxiosWrapper {
     })
 
 
-        console.log(method, url, param);
         switch (method) {
             case 'GET':
                 return client.get(url, {

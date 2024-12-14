@@ -1,18 +1,15 @@
 import React from 'react'
-import ControlTitle from '../CustomControl/ControlTitle'
-import ListHeader from '../CustomControl/ListHeader'
-import ListRow from '../CustomControl/ListRow'
 import Pagination from '../CustomControl/Pagination'
+import ListRow from '../CustomControl/ListRow'
+import ListHeader from '../CustomControl/ListHeader'
+import ControlTitle from '../CustomControl/ControlTitle'
 
-const ListOfTerminals = ({ Dictionary, terminals, setSortOrder, onEdit, onNew, sortId, sortOrder, currentPage, setCurrentPage, pageCount }) => {
-    console.log("ListOfTerminals", terminals)
-
+const ListOfBinRanges = ({ Dictionary, objects, setSortOrder, onEdit, onNew, sortId, sortOrder, currentPage, setCurrentPage, pageCount }) => {
     return (
         <div>
-            <ControlTitle title="List of Terminals" />
+            <ControlTitle title="List of Bin Ranges" />
             {
-                typeof (onNew) === 'function' &&
-                (
+                typeof (onNew) === 'function' && (
                     <div className='addObject'>
                         <button onClick={onNew}>add</button>
                     </div>
@@ -26,11 +23,11 @@ const ListOfTerminals = ({ Dictionary, terminals, setSortOrder, onEdit, onNew, s
                     sortOrder={sortOrder}
                 />
                 {
-                    terminals.map((terminal, index) => (
+                    objects.map((object, index) => (
                         <ListRow
                             key={index}
                             headers={Dictionary}
-                            row={terminal}
+                            row={object}
                             onEdit={onEdit}
                         />
                     ))
@@ -41,4 +38,5 @@ const ListOfTerminals = ({ Dictionary, terminals, setSortOrder, onEdit, onNew, s
     )
 }
 
-export default ListOfTerminals
+
+export default ListOfBinRanges

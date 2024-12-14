@@ -1,7 +1,7 @@
 import React from 'react'
 import ObjectForm from '../CustomControl/ObjectForm'
 
-const CampaignForm = ({ Dictionary, object, setObject, domains }) => {
+const CampaignForm = ({ Dictionary, object, setObject, domains, setDirty }) => {
     return (
         <ObjectForm
             dictionary={Dictionary}
@@ -9,6 +9,7 @@ const CampaignForm = ({ Dictionary, object, setObject, domains }) => {
             setObject={setObject}
            // onSave={onSave}
             //onCancel={onCancel}
+            setDirty={setDirty}
             domains={domains} />
     )
 }

@@ -1,8 +1,8 @@
 import React from 'react'
-import ObjectForm from '../CustomControl/ObjectForm'
 import ControlTitle from '../CustomControl/ControlTitle'
+import ObjectForm from '../CustomControl/ObjectForm'
 
-const ResponseForm = ({ Dictionary, object, setObject, onSave, onCancel, domains, title }) => {
+const CityForm = ({ Dictionary, object, setObject, onSave, onCancel, domains, title }) => {
 
 
     return (
@@ -19,4 +19,4 @@ const ResponseForm = ({ Dictionary, object, setObject, onSave, onCancel, domains
     )
 }
 
-export default ResponseForm
+export default CityForm

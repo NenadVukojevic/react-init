@@ -1,8 +1,10 @@
 import React from 'react'
 import ObjectForm from '../CustomControl/ObjectForm'
+import { boolDomain } from '../CustomControl/TableDictionary'
 import ControlTitle from '../CustomControl/ControlTitle'
 
-const ResponseForm = ({ Dictionary, object, setObject, onSave, onCancel, domains, title }) => {
+const BinRangeForm = (
+    { Dictionary, object, setObject, onSave, onCancel, title }) => {
 
 
     return (
@@ -14,9 +16,10 @@ const ResponseForm = ({ Dictionary, object, setObject, onSave, onCancel, domains
                 setObject={setObject}
                 onSave={onSave}
                 onCancel={onCancel}
-                domains={domains} />
+                domains={[boolDomain]} />
         </div>
     )
+
 }
 
-export default ResponseForm
+export default BinRangeForm

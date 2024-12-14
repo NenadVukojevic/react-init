@@ -1,13 +1,13 @@
 import React from 'react'
-import ObjectForm from '../CustomControl/ObjectForm'
 import ControlTitle from '../CustomControl/ControlTitle'
+import ObjectForm from '../CustomControl/ObjectForm'
 
-const ResponseForm = ({ Dictionary, object, setObject, onSave, onCancel, domains, title }) => {
+const CampaignConfigForm = ({ Dictionary, object, setObject, onSave, onCancel, domains, title }) => {
 
 
     return (
         <div>
-            <ControlTitle title={title} />
+            <ControlTitle title={`${title} - ${object.configName}`} />
             <ObjectForm
                 dictionary={Dictionary}
                 object={object}
@@ -19,4 +19,4 @@ const ResponseForm = ({ Dictionary, object, setObject, onSave, onCancel, domains
     )
 }
 
-export default ResponseForm
+export default CampaignConfigForm
