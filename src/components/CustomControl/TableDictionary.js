@@ -1,3 +1,22 @@
+/*
+    (c) pavel Dec 2024
+*************************************************************************
+*******   D i c t i o n a r y                                   *********
+*************************************************************************
+*******    - used for generating codes based on description     *********
+*******      and data passed as parameter to prototype controls *********
+*******      that "explode" this dictionaries and data          *********
+*************************************************************************
+*************************************************************************
+*/
+
+
+/*
+    Theese two are not actually dictionaries, they are fixed domains used with dictionaries.
+    Most of the domains are read from database.
+
+*/
+
 export const boolDomain = [
     {
         "id": 0,
@@ -21,7 +40,50 @@ export const booleanDomain = [
         "value": "Y"
     }
 ];
+/*
+    Dictionary is used for creating list and forms using prototype files:
+        - ListHeader.jsx
+        - ListRow.jsx
+        - ObjectForm.jsx
 
+    parameters:
+        - title         - label as it will apear in header and on the form
+
+        - id            - parameter name from the recordset, value will be shown in listRow and on the form
+
+        - width         - width of the header label and input element on the form
+
+        - type          - way the data is shown in the List Row:
+                            - text
+                            - boolean (Yes/ No)
+                            - signal  (image - red green dot)
+                            - button  (action eg onEdit)
+
+        - action        - when type is button and action is onEdit it set's button onClick to be onEdit function                            
+
+        - listType      - is this data shown in the listHeeader and listRow
+                            - show
+                            - ignore - don't show
+
+        - formType      - type of control for this parameter on the form
+                            - input
+                            - textarea
+                            - select
+                            - ignore - don't show
+
+        - controlType   - if input control has additional specific type
+                            - date
+                            - number
+
+        - controlValue  - specific for the select formType parameter name from the recordset
+
+        - domainId      - id of the array containing options for that control
+                        - domains is parameter that is passed to the ObjectForm control and it is array of arrays
+ 
+        - optionValue   - for populating option label in select control, name of the parameter from the associated domain (see domain)
+ 
+        - optionId      - for populating option value in select control, name of the parameter from the associated domain (see domain)
+*/
 export const TerminalDictionary = [
     {
         "title": "ID",
@@ -850,3 +912,110 @@ export const CityDictionary = [
         "formType": "ignore"
     },
 ];
+
+export const UserDictionary = [
+    {
+        "title": "ID",
+        "id": "id",
+        "width": "50px",
+        "type": "text",
+        "listType": "show",
+        "formType": "ignore",
+    },
+    {
+        "title": "Username",
+        "id": "username",
+        "width": "100px",
+        "type": "text",
+        "listType": "show",
+        "formType": "input",
+    },
+    {
+        "title": "Name",
+        "id": "name",
+        "width": "150px",
+        "type": "text",
+        "listType": "show",
+        "formType": "input",
+    },
+    {
+        "title": "Password",
+        "id": "password",
+        "width": "150px",
+        "type": "text",
+        "listType": "ignore",
+        "formType": "input",
+        "controlType":"password"
+    },
+    {
+        "title": "e-mail",
+        "id": "email",
+        "width": "250px",
+        "type": "text",
+        "listType": "show",
+        "formType": "input",
+    },
+    {
+        "title": "Active",
+        "id": "enabled",
+        "width": "70px",
+        "type": "signal",
+        "listType": "show",
+        "formType": "select",
+        "controlValue":"enabled",
+        "domainId": 0,
+        "optionValue": "value",
+        "optionId": "id"
+    },
+    {
+        "title": "edit",
+        "id": "id",
+        "width": "50px",
+        "type": "button",
+        "action": "onEdit",
+        "listType": "show",
+        "formType": "ignore"
+    },
+];
+
+export const RoleGroupsAvailableDictionary = [
+    {
+        "title": "Name",
+        "id": "groupname",
+        "width": "250px",
+        "type": "text",
+        "listType": "show",
+        "formType": "input",
+    },
+    {
+        "title": "add",
+        "id": "groupId",
+        "width": "100px",
+        "type": "button",
+        "action": "onEdit",
+        "listType": "show",
+        "formType": "ignore"
+    },
+
+];
+
+export const RoleGroupsSelectedDictionary= [
+    {
+        "title": "remove",
+        "id": "groupId",
+        "width": "100px",
+        "type": "button",
+        "action": "onEdit",
+        "listType": "show",
+        "formType": "ignore"
+    },
+    {
+        "title": "Name",
+        "id": "groupname",
+        "width": "250px",
+        "type": "text",
+        "listType": "show",
+        "formType": "input",
+    },
+    
+]

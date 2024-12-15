@@ -17,6 +17,7 @@ const NavBar = () => {
       <div><Link className='navElement' to={`${basename}/binRangeGroups`}>BinRangeGroups</Link></div>
       <div><Link className='navElement' to={`${basename}/campaignConfig`}>Config</Link></div>
       <div><Link className='navElement' to={`${basename}/city`}>City</Link></div>
+      <div><Link className='navElement' to={`${basename}/users`}>Users</Link></div>
       <div><Link className='navElement' to={`${basename}/login`}>Logout</Link></div>
     </div>
   )

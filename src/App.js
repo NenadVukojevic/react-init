@@ -17,6 +17,7 @@ import TerminalGroups from './components/Terminals/TerminalGroups';
 import CampaignConfig from './components/CampaignConfig/CampaignConfig';
 import Offers from './components/Offers/Offers';
 import City from './components/Cities/City';
+import Users from './components/Users/Users';
 
 
 
@@ -45,6 +46,7 @@ function App() {
 
             <Route path={`${basename}/city`} element={<City />} />
             <Route path={`${basename}/offers`} element={<Offers />} />
+            <Route path={`${basename}/users`} element={<Users />} />
           </Route>
 
           <Route path={`${basename}/*`} element={<Login />} />

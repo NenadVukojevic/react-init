@@ -34,7 +34,8 @@ const ListRow = ({ headers, row, onEdit }) => {
                             }
                             {
                                 header.type === 'signal' && (
-                                    resolveNestedAttribute(row, header.id) === 1 ? <img src={Active} alt={"active"} /> : <img src={Inactive} alt={"Inactive"} />
+                                    (  resolveNestedAttribute(row, header.id) === 1 
+                                    || resolveNestedAttribute(row, header.id) === true)  ? <img src={Active} alt={"active"} /> : <img src={Inactive} alt={"Inactive"} />
                                 )
                             }
                         </div>
